@@ -1,10 +1,90 @@
-@mixin tr($property, $time: .5s) {
-	transition: $property $time linear;
+@mixin tdn() {
+	text-decoration: none;
 }
 
-@mixin myPos($top: 50%, $left: 50%, $tx: -50%, $ty: -50%) {
-	position: absolute;
-	top: $top;
-	left: $left;
-	transform: translate($tx, $ty);
+@mixin hover {
+	@include tr(all);
+	&:hover,
+	&:focus,
+	&:active,
+	&--active{
+		@content;
+	}
 }
+
+@mixin tr($prop) {
+	transition: $prop .3s ease-in;
+}
+
+@mixin posCenter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin bg{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@mixin ellipsis {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+@mixin a {
+  border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    transition: 1s;
+      @include hover {
+        border-bottom: 1px solid $text;
+        border-top: 1px solid $text;
+      }
+}
+@mixin a-btn {
+  border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+    transition: 1s;
+      @include hover {
+        border-bottom: 2px solid $text;
+        border-top: 2px solid $text;
+      }
+}
+
+
+@mixin pl-shift($side: left, $position: -500px, $duration: 200ms) {
+  @include placeholder {
+    text-indent: 0;
+    transition: text-indent $duration;
+  }
+  &:focus {
+    @include placeholder {
+      text-indent: if($side == left, -$position, $position);
+    }
+  }
+}
+
+
+@mixin pl-fade-out($duration: 200ms) {
+  @include placeholder {
+    opacity: 1;
+    transition: opacity $duration;
+  }
+  &:focus {
+    @include placeholder {
+      opacity: 0;
+    }
+  } 
+}
+
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}  
+}
+

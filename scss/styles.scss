@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap');
+
 @import 'normalize';
 @import 'mixins';
+
+$white: #fff;
+$black: #000;
+$offset: 10px;
 
 * {
 	box-sizing: border-box;
@@ -7,13 +13,143 @@
 
 html {
 	font-size: 10px;
-	height: 100%;
+	font-family: Raleway, sans-serif;
 }
 
 body {
-	/* font-family: ''; */
-	font-size: 1.8rem;
-	line-height: 1.6;
-	color: #333;
+	padding: 80px 0;
 	min-height: 100%;
+	font-size: 1.9rem;
+	line-height: 1.6;
+	color: $white;
+	min-height: 100%;
+	@include bg;
+	background-image: url(../imgs/background.jpg);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.container{
+	width: 1110px;
+	max-width: 75%;
+	margin: 0 auto;
+	background-color: rgba(0, 0, 0, .7);
+	border-radius: $offset;
+	padding: 30px;
+	text-align: center;
+}
+
+.list-wrp{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+.list{
+	width: 46%;
+	overflow: hidden;
+}
+
+#todos,
+#completed{
+	list-style: none;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+
+#todos li,
+#completed li{
+	margin-bottom: 30px;
+	border-bottom: 1px solid $white;
+
+}
+
+#todoInput,
+input[type="text"]{
+	height: 40px;
+	width: 70%;
+	outline: none;
+	background-color: transparent;
+	border: 1px solid $white;
+	padding: 0px 15px;
+	color: $white;
+	&:focus{
+		background-color: #dbaa16;
+
+	}
+		&::placeholder {
+				font-size: 1.6rem;
+				text-align: center;
+				color: $white;
+			}
+			&:focus::placeholder {
+				transition: all .4s;
+				@include pl-fade-out();
+			}
+
+}
+#addBtn{
+	width: 20%;
+	height: 40px;
+	background-color: transparent;
+	border: 1px solid $white;
+	color: $white;
+	font-weight: 700;
+	@include hover {
+		background-color: #dbaa16;
+	}
+}
+
+.editBtn,
+.deleteBtn,
+.saveBtn,
+.cancelBtn {
+	width: 80px;
+	border-radius: $offset;
+	border-color: transparent;
+	color: $white;
+	outline: none;
+	margin: $offset 0px;
+}
+
+.editBtn{
+	background-color: #2a4082;
+}
+.cancelBtn{
+	background-color: #b85d09;
+}
+
+.deleteBtn{
+	background-color: #991229;
+}
+.saveBtn{
+	background-color: #1f5c2c;
+}
+
+input[type=checkbox] {
+	display: none;
+}
+
+input[type=checkbox] + span:before {
+    content: "\2713";
+    display: inline;
+    border: 1px solid $white;
+    border-radius: $offset;
+    font-size: 24px;    
+    line-height: 22px;
+    margin: -5px $offset 0 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+span{
+	word-wrap: break-word;
+}
+
+input[type="text"]{
+	width: 100%;
+	
 }
